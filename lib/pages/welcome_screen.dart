@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lpi_app/widgets/gradient_background.dart';
-// Import the file where you defined GradientBackground
+// Remove the import for GradientBackground if you are replacing it entirely
+// import 'package:lpi_app/widgets/gradient_background.dart';
 
 // Enum to represent the languages for type safety
 enum AppLanguage { english, malay, chinese }
@@ -36,13 +36,16 @@ class WelcomeScreen extends StatelessWidget {
     final buttonWidth = screenWidth * 0.8; // Make buttons 80% of screen width
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: true, // Keep body behind transparent AppBar
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: Colors.transparent, // Make AppBar transparent
+        elevation: 0, // Remove AppBar shadow
         actions: [
           PopupMenuButton<AppLanguage>(
-            icon: const Icon(Icons.language, color: Colors.white),
+            icon: const Icon(
+              Icons.language,
+              color: Colors.white,
+            ), // Ensure icon is visible
             onSelected: (AppLanguage result) {
               _onLanguageSelected(result, context);
             },
@@ -65,96 +68,125 @@ class WelcomeScreen extends StatelessWidget {
           const SizedBox(width: 10),
         ],
       ),
-      body: GradientBackground(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // --- CHANGE HERE: Use Image.asset ---
-                Image.asset(
-                  // *** IMPORTANT: Replace with your actual image path ***
-                  'assets/images/plant_logo.png',
-                  height: 80.0, // Adjust height as needed
-                  // You might need width as well depending on the image aspect ratio
-                  // width: 80.0,
-                  // Optional: Apply a color filter if your asset is like an icon
-                  // color: Colors.white,
-                  // colorBlendMode: BlendMode.srcIn, // Use if color is applied
-                ),
+      // --- CHANGE HERE: Replace GradientBackground with Stack ---
+      body: Stack(
+        children: [
+          // Layer 1: Background Image (like in CustomScaffold)
+          Image.asset(
+            // *** IMPORTANT: Use the correct path to YOUR background image ***
+            'assets/images/Background.png',
+            fit: BoxFit.cover, // Cover the entire screen
+            width: double.infinity,
+            height: double.infinity,
+          ),
 
-                // --- END CHANGE ---
-                const SizedBox(height: 30.0),
-
-                const Text(
-                  'Welcome Back',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 60.0),
-
-                // Sign In Button
-                SizedBox(
-                  width: buttonWidth,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      print('Sign In Pressed');
-                    },
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      side: const BorderSide(color: Colors.white, width: 1.5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
+          // Layer 2: Your Content (wrapped in SafeArea)
+          SafeArea(
+            // Ensures content avoids notches, status bars, etc.
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    // --- REPLACED Image.asset with Icon ---
+                    const Icon(
+                      Icons
+                          .eco_outlined, // Choose an appropriate icon (e.g., Icons.local_florist, Icons.spa)
+                      size: 80.0, // Set the desired size
+                      color: Colors.white, // Set the color to be visible
+                      // Optional: Add shadow for better visibility
+                      // shadows: [
+                      //   Shadow(blurRadius: 4.0, color: Colors.black.withOpacity(0.6))
+                      // ],
                     ),
-                    child: const Text(
-                      'SIGN IN',
+                    // --- END REPLACEMENT ---
+                    const SizedBox(height: 30.0),
+
+                    // Welcome Text
+                    const Text(
+                      'Welcome Back',
                       style: TextStyle(
-                        fontSize: 16.0,
+                        color: Colors.white, // Ensure text is visible
+                        fontSize: 28.0,
                         fontWeight: FontWeight.bold,
+                        // Optional: Add shadow for better readability on image
+                        // shadows: [
+                        //   Shadow(blurRadius: 4.0, color: Colors.black.withOpacity(0.5))
+                        // ],
                       ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 20.0),
+                    const SizedBox(height: 60.0),
 
-                // Sign Up Button
-                SizedBox(
-                  width: buttonWidth,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      print('Sign Up Pressed');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: const Color(0xFF2A9D8F),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
+                    // Sign In Button
+                    SizedBox(
+                      width: buttonWidth,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          print('Sign In Pressed');
+                          // TODO: Implement Sign In Navigation/Logic
+                          // Example: Navigator.pushNamed(context, '/login');
+                        },
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          side: const BorderSide(
+                            color: Colors.white,
+                            width: 1.5,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        ),
+                        child: const Text(
+                          'SIGN IN',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
                     ),
-                    child: const Text(
-                      'SIGN UP',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
+                    const SizedBox(height: 20.0),
+
+                    // Sign Up Button
+                    SizedBox(
+                      width: buttonWidth,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          print('Sign Up Pressed');
+                          // TODO: Implement Sign Up Navigation/Logic
+                          // Example: Navigator.pushNamed(context, '/signup');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          // Use a color that contrasts well with white
+                          foregroundColor: const Color(
+                            0xFF2A9D8F,
+                          ), // Example color
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        ),
+                        child: const Text(
+                          'SIGN UP',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 50), // Adjust spacing if needed
+                  ],
                 ),
-                const SizedBox(height: 50),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
+      // --- END CHANGE ---
     );
   }
 }
-
-// Your main.dart remains the same
