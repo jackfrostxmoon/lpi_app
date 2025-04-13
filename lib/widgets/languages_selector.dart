@@ -51,3 +51,33 @@ class LanguageSelectorWidget extends StatelessWidget {
     );
   }
 }
+
+class LanguageSelector extends StatelessWidget {
+  const LanguageSelector({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text('English', style: TextStyle(fontSize: 12)),
+              Text('Malay', style: TextStyle(fontSize: 12)),
+              Text('Chinese', style: TextStyle(fontSize: 12)),
+            ],
+          ),
+        ),
+        const SizedBox(width: 4),
+        const Icon(Icons.language, color: Colors.white),
+      ],
+    );
+  }
+}

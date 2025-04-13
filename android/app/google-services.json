@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "586926426416",
+    "project_id": "lpi-app-bcf7c",
+    "storage_bucket": "lpi-app-bcf7c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586926426416:android:bfe1cbd197df36fa7e20f5",
+        "android_client_info": {
+          "package_name": "com.example.lpi_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqkfUTEMTu88gTjLzTGJSJQHi8T0m-CJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
